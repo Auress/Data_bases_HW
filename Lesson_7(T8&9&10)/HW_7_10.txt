@@ -1,0 +1,40 @@
+-- Урок 7_10. Тема 10 “NoSQL”  
+-- Автор: Шенк Евгений Станиславович
+
+
+-- Задание 1
+
+/*
+В базе данных Redis подберите коллекцию для подсчета посещений с определенных
+IP-адресов.
+*/
+
+HMSET visits_ips 10.10.104.101 "0" 10.10.104.102 "0" 10.10.104.103 "0" 10.10.104.104 "0"
+HINCRBY visits_ips 10.10.104.101 1
+HINCRBY visits_ips 10.10.104.102 1
+HGETALL visits_ips
+
+-- Задание 2
+
+/*
+При помощи базы данных Redis решите задачу поиска имени пользователя по электронному
+адресу и наоборот, поиск электронного адреса пользователя по его имени.
+*/
+
+HMSET users Igor igor123@gmail.com igor123@gmail.com Igor Viktor Vik11@gmail.com Vik11@gmail.com Viktor Ivan i333333@gmail.com i333333@gmail.com Ivan
+HGET users Igor
+HGET users igor123@gmail.com 
+
+-- Задание 3
+
+/*
+Организуйте хранение категорий и товарных позиций учебной базы данных shop в СУБД
+MongoDB.
+*/
+
+db.shop.insert({catalog: 'CPU'})
+db.shop.update({catalog: 'CPU'}, {$set: {products: [{name: 'Intel Core i3-8100', description: 'CPU intel', price:'7890.00'}, {name: 'Intel Core i5-7400', description: 'CPU intel', price:'12700.00'}, {name: 'AMD FX-8320E', description: 'CPU AMD', price:'4780.00'}]}})
+
+db.shop.insert({catalog: 'motherboard'})
+db.shop.update({catalog: 'motherboard'}, {$set: {products: [{name: 'ASUS ROG MAXIMUS X HERO', description: 'motherboard ASUS', price:'19310.00'}, {name: 'Gigabyte H310M S2H', description: 'motherboard Gigabyte', price:'4790.00'}]}})
+
